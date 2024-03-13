@@ -38,6 +38,7 @@ def welcomeScreen ():
 
 def userInput (choice):
     clearScreen()
+    mySum = 0
 
     if (choice == 1):
 
@@ -45,11 +46,18 @@ def userInput (choice):
         flag = digitChecker(bi, choice)
 
         if (flag == 1):
-            print ("\033[0;31mError: Binary can only have digits 0 and 1\033[0m")
+            print ("\033[0;31mError: Binary can only be positive and have digits 0 and 1\033[0m")
             navigation()
 
         if (flag == 0):
-            print("yay")
+            mySum = binaryToDecimal(bi)
+            
+            if (bi == 0):
+                print("Decimal number: ", mySum)
+                print()
+            else:
+                print("Decimal number: ", mySum)
+                print()
 
 
 def clearScreen ():
@@ -65,7 +73,7 @@ def digitChecker(num, choice):
 
     flag = 0
 
-    while (num != 0):
+    while (True):
 
         rem = num % 10
 
@@ -91,5 +99,18 @@ def navigation ():
     if (decision == "n" or decision == "N" or decision == "no" or decision == "No" or decision == "NO" or decision == "nO"):
         clearScreen()
         welcomeScreen()
+
+def binaryToDecimal (bi):
+    i = 0
+    sum = 0
+
+    while (bi != 0):
+
+        rem = bi % 10
+        bi = bi // 10
+        sum = sum + rem * pow ( 2, i)
+        i = i + 1
+
+    return sum
 
 welcomeScreen()
